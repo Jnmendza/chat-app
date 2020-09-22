@@ -18,9 +18,11 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add'
+import { useStateValue } from './StateProvider';
 
 function Sidebar() {
     const [channels, setChannels] = useState([])
+    const [{ user }] = useStateValue();
 
     useEffect(() => {
         // Run this code once when the sidebar component loads.
@@ -49,7 +51,7 @@ function Sidebar() {
                     <h2>Chat App</h2>
                     <h3>
                         <FiberManualRecordIcon />
-                        Jonathan Mendoza
+                        {user?.displayName}
                     </h3>
                 </div>
                 <CreateIcon />
