@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Sidebar.css'
 import SidebarOption from './SidebarOption'
+
+// Firebase
+import db from '../firebase'
 
 // Material UI icon imports
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
@@ -17,6 +20,26 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add'
 
 function Sidebar() {
+    const [channels, setChannels] = useState([])
+
+    useEffect(() => {
+        // Run this code once when the sidebar component loads.
+        // Go inside database (db) and into the collections in () specify which collection
+        // Snapshot basically takes a live picture and whenever it changes it gets updated (real time)
+        db.collection('rooms').onSnapshot(snapshot => (
+            // Go thru every snapshot of the rooms and map thru them
+            setChannels(
+                // the () after => means its returning what you're asking for
+                snapshot.docs.map(doc => ({
+                    // In return we want an object mirroring the schema built in firebase
+                    id: doc.id,
+                    // data gets back everything inside of the doc. The door into the fields
+                    name: doc.data().name
+                }))
+            )
+        ));
+    }, []);
+
     return (
         <div className="sidebar">
 
@@ -44,8 +67,11 @@ function Sidebar() {
             <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
             <hr />
             <SidebarOption Icon={AddIcon} title="Add Channel"/>
-            {/* Connect to Database and list all the possible channels available */}
-            
+            {/* Connect to Database and list all the possible channels available
+            Similar to what is in the useEffect but this is to render it on the client side */}
+            {channels.map(channel => (
+                <SidebarOption title={channel.name} id={channel.id} />
+            ))}
         </div>
     )
 }
