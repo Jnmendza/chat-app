@@ -54,7 +54,8 @@ function Sidebar() {
                 </div>
                 <CreateIcon />
             </div>
-
+            {/*By clicking any SidebarOption component that does NOT have an ID as a prop OR
+            the addChannelOption then the selectChannel function under the else statement will run from SidebarOption comp */}
             <SidebarOption Icon={InsertComment} title="Threads"/>
             <SidebarOption Icon={InboxIcon} title="Mentions & reactions" />
             <SidebarOption Icon={DraftsIcon} title="Saved items" />
@@ -66,7 +67,9 @@ function Sidebar() {
             <hr />
             <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
             <hr />
-            <SidebarOption Icon={AddIcon} title="Add Channel"/>
+            {/*By just adding the prop addChannelOption, its stating if it is there do whatever you define
+            in the SidebarOption component's onClick, in this case it's the addChannel function */}
+            <SidebarOption Icon={AddIcon} addChannelOption title="Add Channel"/>
             {/* Connect to Database and list all the possible channels available
             Similar to what is in the useEffect but this is to render it on the client side */}
             {channels.map(channel => (
