@@ -3,7 +3,7 @@ import './Sidebar.css'
 import SidebarOption from './SidebarOption'
 
 // Firebase
-import db from '../firebase'
+import db from './firebase'
 
 // Material UI icon imports
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';

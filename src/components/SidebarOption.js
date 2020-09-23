@@ -1,7 +1,7 @@
 import React from 'react';
 import './SidebarOption.css';
 import { useHistory } from 'react-router-dom';
-import db from '../firebase';
+import db from './firebase';
 
 function SidebarOption({ Icon, title, id,  addChannelOption }) {
     // keeps track of your web page history like the <- and -> of browser
